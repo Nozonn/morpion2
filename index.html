@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Morpion</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="shadow-layer" onclick="resetGame()">
+        <div id="game-over">
+            <h1>Game over ! </h1>
+            <h2 id="winner"></h2>
+            <button id="restart-button" onclick="resetGame()">Restart</button>
+        </div>
+    </div>
+
+    
+
+    <main>
+        <header id="game-header">
+            <div class="player-turn">Player 1: <span id="player1">X</span></div> | <div>Player 2: <span id="player2">O</span></div>
+        </header>
+
+        <section id="game-board"></section>
+            
+        
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
