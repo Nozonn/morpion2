@@ -246,22 +246,9 @@ player1Score = document.getElementById('player1-score'),
 player2Score = document.getElementById('player2-score'),
 winner = document.getElementById("winner");
 
-
-
-
-
 let countCell = 0,
 boardSize = 3;
 isGame = true,
 turn = 0;
-
-if (!localStorage.getItem('player1Name')) {
-    localStorage.setItem('player1Name', 'Player 1');
-}
-if (!localStorage.getItem('player2Name')) {
-    localStorage.setItem('player2Name', 'Player 2');
-}
-
-
 
 document.addEventListener('DOMContentLoaded', loaded);

@@ -8,8 +8,8 @@ document.getElementById('settings-close').addEventListener('click', () => {
 `
 
 const updateInputs = () => {
-  player1name.value = localStorage.getItem('player1Name') || '';
-  player2name.value = localStorage.getItem('player2Name') || '';
+  player1name.value = localStorage.getItem('player1Name') || 'Player 1';
+  player2name.value = localStorage.getItem('player2Name') || 'Player 2';
   boardSizeInput.value = localStorage.getItem('boardSize') || 3;
 }
 
