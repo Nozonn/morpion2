@@ -1,0 +1,141 @@
+body {
+    perspective: 1000px;
+    overflow: hidden;
+}
+
+#settings-container {
+    display: block;
+    
+    position: absolute;
+    top:60px;right: -100%;
+    width: 50%;
+    max-width: 500px;
+    height: calc(100% - 100px);
+    border-radius: 10px;    
+    z-index: 1000;
+    background-color: var(--bgc);
+    box-shadow: 0 0 10px rgba(173, 16,190, 0.479),
+                0 0 20px rgba(173, 16, 190, 0.479) inset,
+                0 0 10px rgba(173, 16, 190, 0.479),
+                0 0 20px rgba(173, 16, 190, 0.479) inset;
+    
+
+    transform-style: preserve-3d;
+    transform: rotateY(-30deg);
+    transition: all .3s cubic-bezier(.77,0,.18,1);
+    opacity: 0;
+    pointer-events: none;
+
+
+
+    header {
+        width: 100%;
+        height: 60px;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        background-color: var(--bgc);
+        color: var(--fgc);
+        font-size: 1.5rem;
+        border-bottom: 1px solid var(--fgc);
+        margin-bottom: 10px;
+        border-radius: 10px 10px 0 0;
+    }
+
+    #close-settings {
+        font-size: 1.5rem;
+        cursor: pointer;
+        color: var(--fgc);
+        background-color: transparent;
+        border: none;
+        padding: 0;
+        transition: all 0.3s ease;
+        width: 30px;
+        outline: none;
+    }
+
+    #close-settings:hover {
+        color: var(--bgc);
+        background-color: var(--fgc);
+    }
+
+    #settings-content {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        overflow-y: auto;
+    }
+
+    .settings-item {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        padding: 10px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid var(--fgc);
+        width: 100%;
+        margin: 5px 0;
+    }
+
+    .players-name {
+        outline: none;
+        height: 25px;
+        text-align: center;
+        border: 0;
+        border-bottom: 1px solid var(--fgc);
+        background-color: var(--bgc);
+        color: var(--fgc);
+    }
+
+    .players-name:focus {
+        border: 1px solid var(--fgc);
+        box-shadow: 0 0 5px white, 0 0 10px rgba(173, 16, 190, 0.479),
+        0 0 20px rgba(173, 16, 190, 0.479) inset;
+    }
+
+    #board-size {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 50px;
+        outline: none;
+        border: 0;
+        border-bottom: 1px solid var(--fgc);
+        background-color: var(--bgc);
+        color: var(--fgc);
+        font-size: 1rem;
+    }
+
+
+    button {
+        background-color: var(--fgc);
+        color: var(--bgc);
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin: 10px;
+    }
+
+    button:hover,
+    button:focus {
+        background-color: var(--bgc);
+        border: 1px solid var(--fgc);
+        color: var(--fgc);
+        box-shadow: 0 0 10px rgba(173, 16, 190, 0.479),
+                    0 0 20px rgba(173, 16, 190, 0.479) inset;
+    }
+
+
+
+}
+
+
+
+
+#settings-container.visible {
+    right: 0;
+    opacity: 1;
+    pointer-events: auto;
+}

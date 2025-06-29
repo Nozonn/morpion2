@@ -15,6 +15,19 @@ const resetBoard = () => {
 }
 
 
+const whoStart = () => {
+    if (Math.floor(Math.random() * 100) % 2 === 0) {
+        player1.parentNode.classList.add('player-turn');
+        player2.parentNode.classList.remove('player-turn');
+    } else {
+        player2.parentNode.classList.add('player-turn');
+        player1.parentNode.classList.remove('player-turn');
+    }
+
+    return player1.parentNode.classList.contains('player-turn') ? '1' : '2';
+}
+
+
 
 const eventHandlerCellClick = (cell, del=false) => {
     if (!cell._setEvent) {
@@ -71,15 +84,17 @@ function playerTurn(cell) {
     if (!isGame) return;
 
     let player = player1.parentNode.classList.contains('player-turn') ? '1' : '2';
-
+    turn++;
 
     setSymbol(player, cell);
 
-    if (isWin()) {
-        endGame(player);
-        return;
+    if (isWin()) { 
+        return endGame(player);
     }
     
+    if (turn === boardSize * boardSize) {
+        return endGame('draw');
+    }
 
     setStyle(player);
 
@@ -154,11 +169,23 @@ function endGame(player) {
     isGame = false;
 
     document.getElementById("shadow-layer").style.display = "flex";
-    document.getElementById("winner").textContent = player === '1' ? `Player 1 won` : `Player 2 won`;
+
+    if (player === '1') {
+        player1Score.textContent = parseInt(player1Score.textContent) + 1;
+        winner.textContent = "Player 1 won !";
+    } else if (player === '2') {
+        player2Score.textContent = parseInt(player2Score.textContent) + 1;
+        winner.textContent = "Player 2 won !";
+    } else {
+        winner.textContent = "It's a draw !";
+    }
+
+    saveScore();
 }
 
 function resetGame() {
     isGame = true;
+    turn = 0;
     document.getElementById("shadow-layer").style.display = "none";
     
     loaded(null);
@@ -170,26 +197,60 @@ function resetGame() {
 
 // LOADING FUNCTIONS
 
-function loaded(e) {
-    setBoardSize();
+function saveScore() {
+    localStorage.setItem('player1Score', player1Score.textContent);
+    localStorage.setItem('player2Score', player2Score.textContent);
+}
 
+function loadScore() {
+    if (localStorage.getItem('player1Score')) {
+        player1Score.textContent = localStorage.getItem('player1Score');
+    }
+
+    if (localStorage.getItem('player2Score')) {
+        player2Score.textContent = localStorage.getItem('player2Score');
+    }
+}
+
+function loaded(e) {
+
+    if (localStorage.getItem('boardSize')) {
+        boardSize = parseInt(localStorage.getItem('boardSize'), 10);
+    }
+
+    if (localStorage.getItem('player1Name')) {
+        document.getElementById("player1Label").textContent = localStorage.getItem('player1Name')+":";
+    }
+    if (localStorage.getItem('player2Name')) {
+        document.getElementById("player2Label").textContent = localStorage.getItem('player2Name')+":";
+    }
+
+    loadScore();
+    
+    setBoardSize();
     resetBoard();
 
     for (let i = 0; i < boardSize * boardSize; i++) {
         createCell();
     }
+
+    whoStart();
 }
 
 
 const gameBoard = document.getElementById('game-board'),
 gameHeader = document.getElementById('game-header'),
 player1 = document.getElementById('player1'),
-player2 = document.getElementById('player2');
+player2 = document.getElementById('player2'),
+player1Score = document.getElementById('player1-score'),
+player2Score = document.getElementById('player2-score'),
+winner = document.getElementById("winner");
 
 
 
 let countCell = 0,
 boardSize = 3;
-isGame = true;
+isGame = true,
+turn = 0;
 
 document.addEventListener('DOMContentLoaded', loaded);

@@ -5,9 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Morpion</title>
 
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="style/settings_style.css">
 </head>
 <body>
+    <nav>
+        <p><a href="">Score</a> : <span id="player1-score">0</span>/<span id="player2-score">0</span></p>
+        <ul>
+            <li><a href="" id="menu">Menu</a></li>
+            <li><a id="settings" onclick="showSettingsContainer()">Settings</a></li>
+        </ul>
+    </nav>
+
     <div id="shadow-layer" onclick="resetGame()">
         <div id="game-over">
             <h1>Game over ! </h1>
@@ -16,11 +25,9 @@
         </div>
     </div>
 
-    
-
-    <main>
+    <main id="game-container">
         <header id="game-header">
-            <div class="player-turn">Player 1: <span id="player1">X</span></div> | <div>Player 2: <span id="player2">O</span></div>
+            <div class="player-turn"><span id="player1Label">Player 1:</span> <span id="player1">X</span></div> <div><span id="player2Label">Player 2:</span> <span id="player2">O</span></div>
         </header>
 
         <section id="game-board"></section>
@@ -28,6 +35,36 @@
         
     </main>
 
-    <script src="script.js"></script>
+    <main id="settings-container">
+        <header>
+            <h1>Settings</h1>
+            <button id="close-settings" onclick="hideSettingsContainer()">X</button>
+        </header>
+
+        <section id="settings-content">
+            <div class="settings-item">
+                <label for="player1-name">Player 1 Name:</label>
+                <input type="text" id="player1-name" class="players-name" value="Player 1">
+            </div>
+            <div class="settings-item">
+                <label for="player2-name">Player 2 Name:</label>
+                <input type="text" id="player2-name" class="players-name" value="Player 2">
+            </div>
+            <div class="settings-item">
+                <label for="board-size">Board Size:</label>
+                <select id="board-size">
+                    <option value="3">3x3</option>
+                    <option value="4">4x4</option>
+                    <option value="5">5x5</option>
+                </select>
+            </div>
+            
+            <button id="reset-score" onclick="resetScore()">Reset Score</button>
+            <button id="save-settings" onclick="saveSettings()">Save Settings</button>
+        </section>
+    </main>
+
+    <script src="js/script.js"></script>
+    <script src="js/js_settings.js"></script>
 </body>
 </html>
